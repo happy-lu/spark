@@ -21,8 +21,8 @@ def parseLine(cells):
                 info = info + " " + (str(cells[i]))
         return cells[0] + " " + cells[1], cells[2], int(cells[3]), str.strip(info)
     except Exception as err:
-        print cells
-        print err
+        print(cells)
+        print(err)
 
 
 global sql_context
@@ -36,7 +36,7 @@ def initSQLContext(sc, file_name):
     global data_frame
 
     if not sql_context and not data_frame:
-        print "begin init data_frame and sql_context"
+        print("begin init data_frame and sql_context")
         dist_file = sc.textFile(file_name)
         line_rdds = dist_file.filter(lambda line: re.match('\d{4}-\d{2}-\d{2}.+', line)).map(
             lambda line: re.split(" +", line)).filter(
@@ -63,24 +63,24 @@ def show_info_count(file_name, exec_sql, chart_desc, legend_desc):
         rdd = sc.textFile(rdd_name).map(lambda line: re.split(RESULT_FILE_SPLIT, line))
     else:
         sql_context, data_frame = initSQLContext(sc, file_name)
-        print "File: " + file_name
+        print("File: " + file_name)
 
-        # print "All Count:"
-        # print sql_context.sql("select count(*) from log_table").show()
+        # print ( "All Count:")
+        # print ( sql_context.sql("select count(*) from log_table").show())
 
-        # print "Error Count:"
-        # print sql_context.sql("select count(*) from log_table where info like '%error%'").show()
+        # print ( "Error Count:")
+        # print ( sql_context.sql("select count(*) from log_table where info like '%error%'").show())
         #
-        # print "failed Count:"
-        # print sql_context.sql("select count(*) from log_table where info like '%failed%'").show()
+        # print ( "failed Count:")
+        # print ( sql_context.sql("select count(*) from log_table where info like '%failed%'").show())
 
         # @@@later use to_date
         d1 = time.time()
         status_cnt_frame = sql_context.sql(exec_sql)
         status_cnt_frame.cache()
 
-        print status_cnt_frame.take(100)
-        print "method1 use time: " + str(time.time() - d1)
+        print(status_cnt_frame.take(100))
+        print("method1 use time: " + str(time.time() - d1))
 
         rdd = status_cnt_frame.rdd
         rdd.map(lambda line: RESULT_FILE_SPLIT.join(str(i) for i in line)).repartition(
@@ -93,11 +93,11 @@ def show_info_count(file_name, exec_sql, chart_desc, legend_desc):
 def show_as_line(rdd, legend_desc):
     time_array = rdd.map(lambda p: p[1]).distinct(1).collect()
     time_array.sort()
-    print time_array
+    print(time_array)
 
     values_rdd = rdd.map(lambda p: (str(p[0]), (str(p[1]), str(p[2])))).groupByKey()
     r_map = values_rdd.map(
-        lambda (status, tuple_list): parse_group_result(time_array, status, tuple_list)).collectAsMap()
+        lambda data: parse_group_result(time_array, data[0], data[1])).collectAsMap()
 
     fig, ax = plt.subplots()
 
@@ -118,12 +118,12 @@ def show_as_line(rdd, legend_desc):
 
 
 def parse_group_result(time_array, status, tuple_list):
-    print "\nstatus:" + str(status)
+    print("\nstatus:" + str(status))
 
     dict = {}
     [dict.setdefault(each_time, each_Value) for each_time, each_Value in tuple_list]
-    print "tuple_dict:"
-    print dict
+    print("tuple_dict:")
+    print(dict)
 
     value_array = []
     for data_time in time_array:
@@ -133,13 +133,13 @@ def parse_group_result(time_array, status, tuple_list):
         else:
             value_array.append(0)
 
-    print "value_array:"
-    print value_array;
+    print("value_array:")
+    print(value_array)
     return status, value_array
 
     # data_array = data_array[data_array[:, 0].argsort()]
     # t_array = map(list, zip(*data_array))[1]
-    # print "after transfer:" + ",".join(t_array)
+    # print ( "after transfer:" + ",".join(t_array)
     # return status, t_array
 
 

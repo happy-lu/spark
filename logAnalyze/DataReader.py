@@ -52,18 +52,18 @@ def show_info_count(file_name):
         rdd = sc.textFile(rdd_name).map(lambda line: re.split(RESULT_FILE_SPLIT, line))
     else:
         sql_context = initSQLContext(sc, file_name)
-        print "File: " + file_name
+        print("File: " + file_name)
 
-        # print "Error Count:"
-        # print sql_context.sql("select count(*) from log_table where info like '%error%'").show()
+        # print ("Error Count:"
+        # print (sql_context.sql("select count(*) from log_table where info like '%error%'").show()
         #
-        # print "failed Count:"
-        # print sql_context.sql("select count(*) from log_table where info like '%failed%'").show()
+        # print ("failed Count:"
+        # print (sql_context.sql("select count(*) from log_table where info like '%failed%'").show()
 
-        print "Status Count"
+        print("Status Count")
         status_frame = sql_context.sql(
             "select logStatus,count(*) as cnt from log_table group by logStatus order by logStatus asc")
-        print status_frame.show()
+        print(status_frame.show())
 
         status_frame.rdd.map(lambda line: RESULT_FILE_SPLIT.join(str(i) for i in line)).repartition(1).saveAsTextFile(
             rdd_name)
@@ -75,9 +75,9 @@ def show_info_count(file_name):
 
 def show_as_pie(rdd):
     labels = rdd.map(lambda p: int(p[0])).collect();
-    print labels
+    print(labels)
     values = rdd.map(lambda p: int(p[1])).collect();
-    print values
+    print(values)
     fig = plt.figure(figsize=(5, 5), facecolor='white', edgecolor='white')
     colors = ['yellowgreen', 'lightskyblue', 'gold', 'purple', 'lightcoral', 'yellow', 'black']
     # explode = (0.05, 0.05, 0.1, 0, 0, 0, 0, 0, 0, 0)
@@ -93,9 +93,9 @@ def show_as_pie(rdd):
 
 def show_as_line(rdd):
     labels = rdd.map(lambda p: int(p[0])).collect();
-    print labels
+    print(labels)
     values = rdd.map(lambda p: int(p[1])).collect();
-    print values
+    print(values)
     fig = plt.figure(figsize=(8, 4.2), facecolor='white', edgecolor='white')
     plt.axis([0, max(labels), 0, max(values) + 2])
     plt.grid(b=True, which='major', axis='y')
@@ -119,4 +119,4 @@ if __name__ == '__main__':
         show_info_count(each_file)
 
     # totalLength = lineLengths.reduce(lambda a, b: a + b)
-    # print totalLength
+    # print (totalLength)
