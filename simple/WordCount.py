@@ -1,6 +1,6 @@
 import os
 
-os.environ["PYSPARK_PYTHON"] = "D://Python37//python.exe"
+os.environ["PYSPARK_PYTHON"] = "D://Python3//python.exe"
 # os.environ["hadoop.home.dir"]= "D:\\hadoop-3.0.3"
 from pyspark import SparkContext, SparkConf
 
