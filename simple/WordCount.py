@@ -9,7 +9,6 @@ if __name__ == '__main__':
     sc = SparkContext(conf=conf)
 
     distFile = sc.textFile("data.txt")
-
     lineLengths = distFile.map(lambda s: len(s))
     print(lineLengths.reduce(lambda a, b: str(a) + " " + str(b)))
 

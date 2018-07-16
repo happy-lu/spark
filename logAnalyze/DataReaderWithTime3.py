@@ -127,7 +127,7 @@ def parse_group_result(time_array, status, tuple_list):
 
     value_array = []
     for data_time in time_array:
-        if dict.has_key(data_time):
+        if data_time in dict:
             value = dict.get(data_time)
             value_array.append(int(value) if value != 'None' else 0)
         else:
