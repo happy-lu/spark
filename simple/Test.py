@@ -24,8 +24,8 @@ if __name__ == '__main__':
     print([str(x) + str(y) for x, y in zip(line, line2)])
 
     result1 = sc.parallelize(line)
-    print(result1.collect())
-    # print(result1.take(5))
+    # print(result1.collect())
+    print(result1.take(5))
 
     # result = sc.parallelize(line).cartesian(sc.parallelize(line2)).flatMap(lambda data: (data[0], data[1]))
     # result.cache()
