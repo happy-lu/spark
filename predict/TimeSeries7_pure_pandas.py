@@ -2,7 +2,7 @@ import os
 
 from pandas import DataFrame, Series
 
-os.environ["PYSPARK_PYTHON"] = "D://Python3//python.exe"
+# os.environ["PYSPARK_PYTHON"] = "D://Python3//python.exe"
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -190,7 +190,7 @@ if __name__ == '__main__':
     target = 'mem_usage'
 
     predict_start_day = '2018-07-17'
-    shift_days = 7
+    shift_days = 28
 
     params = {'mem_usage': [1, 1, 2], 'cpu_usage': [1, 0, 1]}
     # is_cal_param = True;

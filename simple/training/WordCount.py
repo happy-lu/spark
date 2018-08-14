@@ -8,9 +8,9 @@ if __name__ == '__main__':
     conf = SparkConf().setAppName("test").setMaster("local[5]")
     sc = SparkContext(conf=conf)
 
-    distFile = sc.textFile("data.txt")
-    lineLengths = distFile.map(lambda s: len(s))
-    print(lineLengths.reduce(lambda a, b: str(a) + " " + str(b)))
+    row_rdd = sc.textFile("data.txt")
+    words_rdd = row_rdd.flatMap(lambda s: s.split(' '))
+    print("words_rdd:" + str(words_rdd.take(100)))
 
-    totalLength = lineLengths.reduce(lambda a, b: a + b)
-    print(totalLength)
+    num_rdd = words_rdd.map(lambda s: (s, 1)).reduceByKey(lambda a, b: a + b)
+    print("num_rdd:" + str(num_rdd.take(100)))
