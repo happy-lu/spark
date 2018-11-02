@@ -121,7 +121,7 @@ def find_sql_area(pic_path, new_path, show_debug_pic=False):
             cv2.line(img, (x, 0), (x, y_length), (0, 0, 255), 1)
 
     if len(horizon_lines_y) < 3:
-        print(pic_path + " has no suit area, skip it")
+        logger.info(pic_path + " has no suit area, skip it")
         return OPER_RESULT_JUMPED
     elif len(horizon_lines_y) == 3:
         # area between line 2 and 3
@@ -162,6 +162,8 @@ def show_one(src_file, dest_file):
 
 
 def deal_folder(pic_folder, new_folder):
+    logger.info("The folder [%s] execute begin" % pic_folder)
+
     is_exists = os.path.exists(new_folder)
     if not is_exists:
         os.makedirs(new_folder)
@@ -223,6 +225,6 @@ if __name__ == '__main__':
         else:
             deal_folder(src_file, dest_file)
     except Exception as err:
-        logger.error("Command has occurred the below error:")
+        logger.error("Occurred the below error:")
         logger.exception(err)
         raise err
