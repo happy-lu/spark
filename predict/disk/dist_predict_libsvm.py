@@ -73,7 +73,7 @@ def exec_method(spark, data):
 def read_csv(spark, file_name):
     sql_context = SQLContext(spark)
 
-    df = sql_context.read.format('com.databricks.spark.csv').options(header='true', format="string").load(
+    df = sql_context.read.format('com.databricks.mytest.csv').options(header='true', format="string").load(
         file_name)
 
     dateIndexer = StringIndexer(inputCol="date", outputCol="date_index").fit(df)
@@ -148,9 +148,9 @@ if __name__ == "__main__":
 
     exec_start_time = time.time()
 
-    spark = SparkSession.builder.appName("disk_predict").config("spark.driver.memory",
-                                                                "2g").config("spark.sql.shuffle.partitions",
-                                                                             5).config("spark.defalut.parallelism",
+    spark = SparkSession.builder.appName("disk_predict").config("mytest.driver.memory",
+                                                                "2g").config("mytest.sql.shuffle.partitions",
+                                                                             5).config("mytest.defalut.parallelism",
                                                                                        10).getOrCreate()
 
     in_folder = 'E:\\mldata\\hard-disk-2016-q1-data-small'

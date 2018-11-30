@@ -64,7 +64,7 @@ def exec_method(spark, data):
 def read_csv(spark, file_name):
     sql_context = SQLContext(spark)
 
-    df = sql_context.read.format('com.databricks.spark.csv').options(header='true', format="string").load(
+    df = sql_context.read.format('com.databricks.mytest.csv').options(header='true', format="string").load(
         file_name)
 
     dateIndexer = StringIndexer(inputCol="date", outputCol="date_index").fit(df)
@@ -90,10 +90,10 @@ if __name__ == "__main__":
 
     exec_start_time = time.time()
     conf = SparkConf().setAppName("disk_predict").setMaster("local[10]")
-    conf.set("spark.sql.crossJoin.enabled", True)
-    conf.set("spark.sql.shuffle.partitions", 5)
-    conf.set("spark.defalut.parallelism", 10)
-    conf.set("spark.driver.memory", "2g")
+    conf.set("mytest.sql.crossJoin.enabled", True)
+    conf.set("mytest.sql.shuffle.partitions", 5)
+    conf.set("mytest.defalut.parallelism", 10)
+    conf.set("mytest.driver.memory", "2g")
     spark = SparkContext(conf=conf)
 
 

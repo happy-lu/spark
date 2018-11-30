@@ -67,7 +67,7 @@ def read_csv(spark, file_name):
     customSchema = StructType([
         StructField("date", StringType(), True)])
 
-    df = sql_context.read.format('com.databricks.spark.csv').options(header='true', format="string").load(
+    df = sql_context.read.format('com.databricks.mytest.csv').options(header='true', format="string").load(
         file_name)
 
     df.show()
@@ -92,7 +92,7 @@ if __name__ == "__main__":
 
     # $example on$
     # Load and parse the data file, converting it to a DataFrame.
-    # data = spark.read.format("libsvm").load("sample_libsvm_data.txt")
+    # data = mytest.read.format("libsvm").load("sample_libsvm_data.txt")
     data = read_csv(spark, "E://mldata//hard-disk-2016-q1-data//2016-01-11.csv")
 
-    # exec_method(spark, data)
+    # exec_method(mytest, data)

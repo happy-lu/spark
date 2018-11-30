@@ -129,9 +129,9 @@ def show_as_line(rdd):
 
 if __name__ == '__main__':
     conf = SparkConf().setAppName("logReader").setMaster("local[10]")
-    conf.set("spark.sql.crossJoin.enabled", True)
-    conf.set("spark.sql.shuffle.partitions", 5)
-    conf.set("spark.defalut.parallelism", 2)
+    conf.set("mytest.sql.crossJoin.enabled", True)
+    conf.set("mytest.sql.shuffle.partitions", 5)
+    conf.set("mytest.defalut.parallelism", 2)
     sc = SparkContext(conf=conf)
     # sc.setLogLevel("DEBUG")
 

@@ -66,7 +66,7 @@ def exec_method(spark, data):
 def read_csv(spark, file_name):
     sql_context = SQLContext(spark)
 
-    df = sql_context.read.format('com.databricks.spark.csv').options(header='true', format="string").load(
+    df = sql_context.read.format('com.databricks.mytest.csv').options(header='true', format="string").load(
         file_name)
 
     dateIndexer = StringIndexer(inputCol="date", outputCol="date_index").fit(df)
@@ -98,7 +98,7 @@ def sl_by_dataframe():
     rdd_name = os.path.join(out_folder, file_name)
 
     if os.path.exists(rdd_name):
-        # rdd = spark.textFile(rdd_name).map(lambda p: Row(
+        # rdd = mytest.textFile(rdd_name).map(lambda p: Row(
         #     failure=p[0],
         #     indexedFeatures=p[1]
         # ))
@@ -121,7 +121,7 @@ def sl_by_libsvm():
     rdd_name = os.path.join(out_folder, file_name)
 
     if os.path.exists(rdd_name):
-        # rdd = spark.textFile(rdd_name).map(lambda p: Row(
+        # rdd = mytest.textFile(rdd_name).map(lambda p: Row(
         #     failure=p[0],
         #     indexedFeatures=p[1]
         # ))
@@ -143,10 +143,10 @@ if __name__ == "__main__":
 
     exec_start_time = time.time()
     conf = SparkConf().setAppName("disk_predict").setMaster("local[10]")
-    conf.set("spark.sql.crossJoin.enabled", True)
-    conf.set("spark.sql.shuffle.partitions", 5)
-    conf.set("spark.defalut.parallelism", 10)
-    conf.set("spark.driver.memory", "2g")
+    conf.set("mytest.sql.crossJoin.enabled", True)
+    conf.set("mytest.sql.shuffle.partitions", 5)
+    conf.set("mytest.defalut.parallelism", 10)
+    conf.set("mytest.driver.memory", "2g")
     spark = SparkContext(conf=conf)
     sql_context = SQLContext(spark)
 
@@ -165,6 +165,6 @@ if __name__ == "__main__":
             full_data = data
 
     print("begin exec_method")
-    # exec_method(spark, full_data)
+    # exec_method(mytest, full_data)
 
     print("use time:" + str(time.time() - exec_start_time))

@@ -8,9 +8,9 @@ import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
     conf = SparkConf().setAppName("logReader").setMaster("local[10]")
-    conf.set("spark.sql.crossJoin.enabled", True)
-    conf.set("spark.sql.shuffle.partitions", 5)
-    conf.set("spark.defalut.parallelism", 10)
+    conf.set("mytest.sql.crossJoin.enabled", True)
+    conf.set("mytest.sql.shuffle.partitions", 5)
+    conf.set("mytest.defalut.parallelism", 10)
     sc = SparkContext(conf=conf)
     sql_context = SQLContext(sc)
     # sc.setLogLevel("DEBUG")
@@ -21,7 +21,7 @@ if __name__ == '__main__':
     # files = ["E://logs//ceph//ucsm-osd.*.log"];
     file = "E://mldata//predict//hostresource_nonet.csv";
 
-    df = sql_context.read.format('com.databricks.spark.csv').options(header='true', inferschema='true').load(
+    df = sql_context.read.format('com.databricks.mytest.csv').options(header='true', inferschema='true').load(
         file)
     pandas_frame = df.filter("hostaddr='192.168.232.183'").select("createtime", "cpu_usage").toPandas().set_index(
         "createtime")

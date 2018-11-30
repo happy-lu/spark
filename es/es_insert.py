@@ -7,7 +7,7 @@ import random
 
 def insert_data(index_name, input_list, batch_num=1, loop_times=1):
     start_time = time.time()
-    es = Elasticsearch(['192.168.231.251:9200'])
+    es = Elasticsearch(['192.168.221.23:9200'])
 
     if batch_num == 1:
         for each_dict in input_list:
@@ -65,12 +65,12 @@ def read_file(file_path):
 
 if __name__ == '__main__':
     batch_num = 10000
-    loop_times = 1000
+    loop_times = 10
 
     data_list = read_file("som.data")
     # print(data_list)
 
-    insert_data("som", data_list, batch_num, loop_times)
+    insert_data("som_test", data_list, batch_num, loop_times)
 
     # voice_list = read_file("voice.data")
     # print(voice_list[0])
