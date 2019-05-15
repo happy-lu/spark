@@ -36,7 +36,8 @@ if __name__ == "__main__":
 
     # $example on$
     # Load and parse the data file, converting it to a DataFrame.
-    data = spark.read.format("libsvm").load("sample_libsvm_data.txt")
+    # data = spark.read.format("libsvm").load("sample_libsvm_data.txt")
+    data = spark.read.format("libsvm").load("failed2.txt")
 
     # Index labels, adding metadata to the label column.
     # Fit on whole dataset to include all labels in index.

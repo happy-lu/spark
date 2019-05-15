@@ -58,15 +58,15 @@ class FileMerger(object):
                         unconfirm_tuple = (k, each_value) if each_value != "" else unconfirm_tuple
                 continue
 
-            #  insert new diff cmd to confirm_dict
+            #  insert skr diff cmd to confirm_dict
             old_list = list(confirm_dict.values())
             comp_count = recent_items_count if len(old_list) > recent_items_count else len(old_list)
             comp_list = old_list[-comp_count:]
             new_confirmed_list = self.get_new_items(comp_list, value_list[:-1])
-            # have new cmd
+            # have skr cmd
             if len(new_confirmed_list) > 0:
                 for i, value in enumerate(new_confirmed_list):
-                    # 1st confirmed unconfirm_tuple. because gui may delete all commands then add new commands
+                    # 1st confirmed unconfirm_tuple. because gui may delete all commands then add skr commands
                     if unconfirm_tuple:
                         confirm_dict[unconfirm_tuple[0], tail_index] = unconfirm_tuple[1]
                         unconfirm_tuple = None

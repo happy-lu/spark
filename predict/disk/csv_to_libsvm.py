@@ -1,9 +1,9 @@
 if __name__ == '__main__':
 
     # read data file
-    readin = open('E:\\mldata\\2016-01-11.csv', 'r')
+    readin = open('E:\\mldata\\disknew\\failed2.csv', 'r')
     # write data file
-    output = open('E:\\mldata\\2016-01-11.txt', 'w')
+    output = open('E:\\mldata\\disknew\\failed2.txt', 'w')
     try:
         the_line = readin.readline()
         while the_line:

@@ -75,7 +75,7 @@ if __name__ == '__main__':
     # files = ["E://logs//ceph//ucsm-osd.*.log"];
     file = "E://mldata//predict//hostresource_nonet.csv";
 
-    df = sql_context.read.format('com.databricks.mytest.csv').options(header='true', inferschema='true').load(
+    df = sql_context.read.format('com.databricks.spark.csv').options(header='true', inferschema='true').load(
         file)
     data_rdd = df.select("hostaddr", "createtime", "cpu_usage").filter("hostaddr='192.168.232.183'").rdd
     data_rdd.cache()

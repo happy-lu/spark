@@ -66,6 +66,7 @@ def exec_method(spark, data):
     rfModel = model.stages[2]
     print(rfModel)  # summary only
     # $example off$
+    print("model detail\n:" + rfModel.toDebugString)
 
     spark.stop()
 
@@ -73,7 +74,7 @@ def exec_method(spark, data):
 def read_csv(spark, file_name):
     sql_context = SQLContext(spark)
 
-    df = sql_context.read.format('com.databricks.mytest.csv').options(header='true', format="string").load(
+    df = sql_context.read.format('com.databricks.spark.csv').options(header='true', format="string").load(
         file_name)
 
     dateIndexer = StringIndexer(inputCol="date", outputCol="date_index").fit(df)
@@ -100,7 +101,7 @@ def read_csv(spark, file_name):
     return df4
 
 
-def sl_by_libsvm(spark):
+def sl_by_libsvm(spark,file_name):
     out_folder = 'E:\\mldata\\libsvm-small'
     rdd_name = os.path.join(out_folder, file_name)
 
@@ -148,9 +149,9 @@ if __name__ == "__main__":
 
     exec_start_time = time.time()
 
-    spark = SparkSession.builder.appName("disk_predict").config("mytest.driver.memory",
-                                                                "2g").config("mytest.sql.shuffle.partitions",
-                                                                             5).config("mytest.defalut.parallelism",
+    spark = SparkSession.builder.appName("disk_predict").config("spark.driver.memory",
+                                                                "2g").config("spark.sql.shuffle.partitions",
+                                                                             5).config("spark.defalut.parallelism",
                                                                                        10).getOrCreate()
 
     in_folder = 'E:\\mldata\\hard-disk-2016-q1-data-small'
@@ -165,7 +166,7 @@ if __name__ == "__main__":
         full_data = full_data.union(positive_data)
 
     for file_name in children:
-        data = sl_by_libsvm(spark)
+        data = sl_by_libsvm(spark,file_name)
 
         if not prepare:
             full_data = full_data.union(data)

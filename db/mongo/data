@@ -1,0 +1,11 @@
+{
+	"k1": "BUCKET1",
+	"k2": "/Corporate/Employees/45_Jane_ Doe.xls",
+	"k3": "45_Jane_Doe.xls",
+	"k4": "http://product.uniswdc.com/Corporate/Employees/45_Jane_ Doe.xls",
+	"k5": "2019-04-18T13:01:12",
+	"k6": "2019-04-18T13:02:22 218888913",
+	"k7": "x-amz-meta-TEST",
+	"k8": "stephenpu",
+	"k9": "x-amz-version-id-1011"
+}

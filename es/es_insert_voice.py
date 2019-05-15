@@ -7,7 +7,7 @@ import random
 
 def insert_data(index_name, input_list, batch_num=1, loop_times=1):
     start_time = time.time()
-    es = Elasticsearch(['192.168.231.250:9200'])
+    es = Elasticsearch(['192.168.221.23:9200', '192.168.221.25:9200'])
 
     if batch_num == 1:
         for each_dict in input_list:
@@ -16,23 +16,27 @@ def insert_data(index_name, input_list, batch_num=1, loop_times=1):
         total_times = 0
         for i in range(loop_times):
             bacth_list = init_data(input_list, batch_num)
+            print("need save data:")
+            try:
+                actions = []
+                for each_dict in bacth_list:
+                    action = {
+                        "_index": index_name,
+                        "_type": 'doc',
+                        "_source": each_dict
+                    }
+                    actions.append(action)
 
-            actions = []
-            for each_dict in bacth_list:
-                action = {
-                    "_index": index_name,
-                    "_type": 'doc',
-                    "_source": each_dict
-                }
-                actions.append(action)
+                last_time = time.time()
+                helpers.bulk(es, actions, request_timeout=60)
+                d_time = (time.time() - last_time)
 
-            last_time = time.time()
-            helpers.bulk(es, actions, request_timeout=60)
-            d_time = (time.time() - last_time)
-
-            total_times += d_time
-            print("batch_num: %s, loop_times: %s, use time: %s" % (
-                batch_num, i, d_time))
+                total_times += d_time
+                print("batch_num: %s, loop_times: %s, use time: %s" % (
+                    batch_num, i, d_time))
+            except Exception as e:
+                print("aaa")
+                print(e)
 
     t = time.time() - start_time
     print("index_name: %s, batch_num: %s, loop_times: %s, use time: %s, insert_es_time: %s" % (
@@ -67,10 +71,10 @@ if __name__ == '__main__':
     batch_num = 10000
     loop_times = 1000
 
-    data_list = read_file("voice.data")
+    data_list = read_file("data")
     # print(data_list)
 
     insert_data("voice", data_list, batch_num, loop_times)
 
-    # voice_list = read_file("voice.data")
+    # voice_list = read_file("data")
     # print(voice_list[0])

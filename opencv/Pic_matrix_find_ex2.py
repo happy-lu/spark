@@ -68,7 +68,7 @@ def find_sql_area(pic_path, new_path):
     width = x2 - x1
     crop_img = img[y1:y1 + hight, x1:x1 + width]
     cv2.imshow("img", crop_img)
-    print("Successful deal with picture %s, the new file is %s" % (pic_path, new_path))
+    print("Successful deal with picture %s, the skr file is %s" % (pic_path, new_path))
     cv2.imwrite(new_path, crop_img)
 
 

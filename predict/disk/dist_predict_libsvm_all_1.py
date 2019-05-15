@@ -59,14 +59,14 @@ def exec_method(spark, data):
     rfModel = model.stages[2]
     print(rfModel)  # summary only
     # $example off$
-
+    # print("model detail\n:" + rfModel.toDebugString)
     spark.stop()
 
 
 def read_csv(spark, file_name):
     sql_context = SQLContext(spark)
 
-    df = sql_context.read.format('com.databricks.mytest.csv').options(header='true', format="string").load(
+    df = sql_context.read.format('com.databricks.spark.csv').options(header='true', format="string").load(
         file_name)
 
     dateIndexer = StringIndexer(inputCol="date", outputCol="date_index").fit(df)
@@ -111,7 +111,7 @@ if __name__ == "__main__":
 
     exec_start_time = time.time()
 
-    spark = SparkSession.builder.appName("disk_predict").config("mytest.driver.memory",
+    spark = SparkSession.builder.appName("disk_predict").config("spark.driver.memory",
                                                                 "2g").getOrCreate()
 
     in_folder = 'E:\\mldata\\hard-disk-2016-q1-data-small'

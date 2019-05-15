@@ -67,7 +67,7 @@ def read_csv(spark, file_name):
     customSchema = StructType([
         StructField("date", StringType(), True)])
 
-    df = sql_context.read.format('com.databricks.mytest.csv').options(header='true', format="string").load(
+    df = sql_context.read.format('com.databricks.spark.csv').options(header='true', format="string").load(
         file_name)
 
     df.show()

@@ -31,8 +31,8 @@ def parse_file(in_folder, out_folder, file_name, serial_dict=None, model_dict=No
 
 
 if __name__ == '__main__':
-    in_folder = 'E:\\mldata\\hard-disk-2016-q1-data'
-    out_folder = 'E:\\mldata\\libsvm'
+    in_folder = 'E:\\mldata\\disknew\\csv'
+    out_folder = 'E:\\mldata\\disknew\\libsvm'
 
     children = os.listdir(in_folder)
     for file_name in children:

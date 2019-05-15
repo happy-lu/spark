@@ -1,0 +1,32 @@
+select * from test1;
+select * from test2;
+select * from test3 where System_Name= 'abcdefg';
+
+SELECT month,
+       user_type AS trfname,
+       COUNT(DISTINCT endpoint_id) AS number
+FROM (
+SELECT TO_CHAR(date_time,'yyyy-mm') AS MONTH,
+             DATE_PART(DAY,last_day (date_time)) AS days,
+             user_type,
+             endpoint_id
+      FROM endpoint_usertype_days t1
+      WHERE t1.org_id = 180079
+      AND   t1.endpoint_id > 0
+      AND   date_time >= '2017-04-21'
+      AND   date_time < '2017-05-18'
+      GROUP BY 1,
+               2,
+               3,
+               4
+      HAVING (user_type = 'Gaming' AND SUM(USAGE) > 1024*1024*DATE_PART(
+	  DAY,last_day (date_time)) / 30) OR (user_type = 'Social')) AS t
+GROUP BY 1,
+         2
+ORDER BY 1,
+         2
+
+			select * from test31
+
+select * from test4;
+select * from test5;

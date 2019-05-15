@@ -64,7 +64,7 @@ def exec_method(spark, data):
 def read_csv(spark, file_name):
     sql_context = SQLContext(spark)
 
-    df = sql_context.read.format('com.databricks.mytest.csv').options(header='true', format="string").load(
+    df = sql_context.read.format('com.databricks.spark.csv').options(header='true', format="string").load(
         file_name)
 
     dateIndexer = StringIndexer(inputCol="date", outputCol="date_index").fit(df)

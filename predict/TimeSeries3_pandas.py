@@ -21,7 +21,7 @@ if __name__ == '__main__':
     # files = ["E://logs//ceph//ucsm-osd.*.log"];
     file = "E://mldata//predict//hostresource_nonet.csv";
 
-    df = sql_context.read.format('com.databricks.mytest.csv').options(header='true', inferschema='true').load(
+    df = sql_context.read.format('com.databricks.spark.csv').options(header='true', inferschema='true').load(
         file)
     pandas_frame = df.filter("hostaddr='192.168.232.183'").select("createtime", "cpu_usage").toPandas().set_index(
         "createtime")
