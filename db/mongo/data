@@ -1,11 +1,28 @@
 {
-	"k1": "BUCKET1",
-	"k2": "/Corporate/Employees/45_Jane_ Doe.xls",
-	"k3": "45_Jane_Doe.xls",
-	"k4": "http://product.uniswdc.com/Corporate/Employees/45_Jane_ Doe.xls",
-	"k5": "2019-04-18T13:01:12",
-	"k6": "2019-04-18T13:02:22 218888913",
-	"k7": "x-amz-meta-TEST",
-	"k8": "stephenpu",
-	"k9": "x-amz-version-id-1011"
+    "eventVersion" : "2.1",
+    "eventSource" : "ActiveScale",
+    "awsRegion" : "null",
+    "eventTime" : "2019-06-04T09:36:54.774Z",
+    "operation" : "Create",
+    "s3SchemaVersion" : "1.0",
+    "configurationId" : "test2",
+    "bucketName" : "pingzheng",
+    "principalId" : "805CE20D348975B7133DCFD9BB",
+    "arn" : "arn:aws:s3:::pingzheng",
+    "filename" : "test_220_1559641014.77.txt",
+    "size" : 34,
+    "hash" : "af765404864a3e78e6c609adb6e0fa71",
+    "versionId" : "RnWd0jm1r.QvvfaEoLbrHF69sewwdyc7cZHaTVYh11QfY2AF",
+    "sequencer" : "58a7c38a9ab03",
+    "objectPath" : "/pingzheng/test_220_1559641014.77.txt",
+    "urlName" : "http://192.168.240.10:80/pingzheng/test_220_1559641014.77.txt",
+    "hasCustomMetadata" : true,
+    "customMetadata" : {
+        "company" : "uniswdc",
+        "creator" : "StephenPu",
+        "department" : "R&D",
+        "objname" : "test_220_1559641014.77.txt",
+        "role" : "Manager"
+    },
+    "owner" : "peter.li@uniswdc.com"
 }

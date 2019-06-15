@@ -59,10 +59,10 @@ def run_and_show_detail(X, y, name, reg):
     y_pred = reg.predict(X_test)
     print (y_pred)
 
-    if hasattr(reg, "score"):
-        print("predict accuracy：", reg.score(X_test, y_test))
-
-    return valid_and_show_detail(X_train, X_test, y_train, y_test, y_pred, name, reg)
+    # if hasattr(reg, "score"):
+    #     print("predict accuracy：", reg.score(X_test, y_test))
+    #
+    # return valid_and_show_detail(X_train, X_test, y_train, y_test, y_pred, name, reg)
 
 
 def valid_and_show_detail(X_train, X_test, y_train, y_test, y_pred, name, reg, show_pr_plot=False):
@@ -238,19 +238,19 @@ def sklearn_method(np_array):
             for name, reg in avl_methods.items():
                 print("use method:%s, use_smote: %s, use_stand: %s" % (name, smote, stand))
                 # AUC, fpr, tpr, r2, mse, rmse = cross_valid(cal_X, cal_y, name, reg)
-
-                AUC, fpr, tpr, r2, mse, rmse = run_and_show_detail(X, y, name, reg)
-
-                result_dict[name, smote, stand] = AUC
-                if AUC > maxAuc:
-                    maxAuc = AUC
-                    best_method = name
-                    use_smote = smote
-                    use_stand = stand
-    print(
-        "best_method: %s, use_smote: %s, use_stand: %s, maxAuc is: %s" % (best_method, use_smote, use_stand, maxAuc))
-    result_dict = sorted(result_dict.items(), key=lambda d: d[1])
-    print("result map is:\n", result_dict)
+                run_and_show_detail(X, y, name, reg)
+                # AUC, fpr, tpr, r2, mse, rmse = run_and_show_detail(X, y, name, reg)
+                #
+                # result_dict[name, smote, stand] = AUC
+                # if AUC > maxAuc:
+                #     maxAuc = AUC
+                #     best_method = name
+                #     use_smote = smote
+                #     use_stand = stand
+    # print(
+    #     "best_method: %s, use_smote: %s, use_stand: %s, maxAuc is: %s" % (best_method, use_smote, use_stand, maxAuc))
+    # result_dict = sorted(result_dict.items(), key=lambda d: d[1])
+    # print("result map is:\n", result_dict)
 
 
 if __name__ == '__main__':
