@@ -12,7 +12,7 @@ def insert(data_list, host, port):
     ctime = time.time()
 
     try:
-        result = db.metaMan.bulk_write(data_list)
+        result = db.unis_test.bulk_write(data_list)
         print("inserted_count:", result.inserted_count)
         print("use time:", (time.time() - ctime))
 
@@ -69,7 +69,7 @@ def read_file(file_path):
 if __name__ == '__main__':
     host = sys.argv[1]
     port = sys.argv[2]
-    batch_num = 100000
+    batch_num = 100
     loop_times = 270
 
     client = pymongo.MongoClient(host=host, port=int(port),
